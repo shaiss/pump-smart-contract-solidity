@@ -57,6 +57,81 @@ Planned dashboard support for token metrics, price charts, migration status, and
 - [Sell Tx](https://testnet.monadexplorer.com/tx/0x3058ceca20593a1acff0e4c3534a92243ff554dc951f40e61a87476b75c29e9d)
 - [Buy & Migration to Uniswap](https://testnet.monadexplorer.com/tx/0x1dd9da4ec6acab116cc2b4a24c97ff5e6a93a0fe5ce0c8413436a0489243cad2)
 
+## Conduit Leo (OP Stack testnet)
+
+This fork adds a **`leo` Hardhat network** (chain ID **71757**, default RPC from the Conduit dashboard). There is **no frontend** in this repo; use the **Pump CLI** (optional [gum](https://github.com/charmbracelet/gum) menus), npm scripts, or `cast`.
+
+### Pump CLI (menu or flags)
+
+Install **gum**: `winget install charmbracelet.gum` (Windows) or see [charmbracelet/gum](https://github.com/charmbracelet/gum).
+
+From the project root (`pump-smart-contract-solidity`):
+
+| Action | Command |
+|--------|---------|
+| Interactive menu | `npm run pump` (PowerShell) or `npm run pump:sh` / `./scripts/pump-cli.sh` (bash) |
+| Deploy factory | `.\scripts\pump-cli.ps1 deploy` |
+| Launch (flags) | `.\scripts\pump-cli.ps1 launch -Name "Meme" -Symbol MEME -BuyEth 0.01` |
+| List tokens | `.\scripts\pump-cli.ps1 list` (pipes CSV through [`gum table`](https://github.com/charmbracelet/gum)) or `npm run list:leo` (pretty text in terminal) |
+| Sell | `.\scripts\pump-cli.ps1 sell -Token 0x... -AmountWei 1000000000000000000` |
+| Other network | `.\scripts\pump-cli.ps1 -Network monad list` |
+
+**Hardhat passthrough** (no gum): arguments after `--` go to the script:
+
+```bash
+node scripts/run-hardhat.cjs run scripts/launchToken.ts --network leo -- --name "Meme" --symbol MEME --buy 0
+node scripts/run-hardhat.cjs run scripts/sellToken.ts --network leo -- --token 0x... --amount 1000000000000000000
+```
+
+Scripts use `node scripts/run-hardhat.cjs` instead of `npx hardhat` so npm does not warn about stray env vars (e.g. `npm_config_metrics_registry`).
+
+**List tokens** reads `TokenLaunched` logs from the factory (from `factoryDeploymentBlock` in `deployments/<network>.json`; redeploy if that field is missing and the chain is large). Set `PUMP_LIST_FORMAT=csv` for machine-readable rows (used by the Pump CLI for `gum table`).
+
+---
+
+1. Copy `.env.example` → `.env` and set `PRIVATE_KEY` (funded on Leo).
+2. Deploy factory (uses a **mock Uniswap V2 router** unless you set `UNISWAP_V2_ROUTER`):
+
+   ```bash
+   npm run deploy:leo
+   ```
+
+3. Launch a token (optional first buy in ETH):
+
+   PowerShell / cmd:
+
+   ```bash
+   set TOKEN_NAME=MyCoin
+   set TOKEN_SYMBOL=COIN
+   set INITIAL_BUY_ETH=0.01
+   npm run launch:leo
+   ```
+
+   bash:
+
+   ```bash
+   export TOKEN_NAME=MyCoin TOKEN_SYMBOL=COIN INITIAL_BUY_ETH=0.01
+   npm run launch:leo
+   ```
+
+4. Sell back to the curve (set `TOKEN_ADDRESS` from launch logs; `TOKEN_AMOUNT` in wei):
+
+   ```bash
+   set TOKEN_ADDRESS=0x...
+   set TOKEN_AMOUNT=1000000000000000000
+   npm run sell:leo
+   ```
+
+**`cast` (Foundry)** against `deployments/leo.json` → `factory`:
+
+```bash
+cast send <FACTORY> "launchToken(string,string)" "Name" "SYM" --value 0ether --rpc-url https://rpc-leo-jqsck8sctd.t.conduit.xyz --chain 71757 --private-key $PRIVATE_KEY
+```
+
+Use the ABI at `artifacts/contracts/PumpFactory.sol/PumpCloneFactory.json` for other calls.
+
+**Contract caveat:** `PumpCloneFactory` in this repository has **no separate “buy” function** after launch—only `launchToken` (with optional ETH in the same tx) and `sellToken`. Uniswap migration is described in the README but **not implemented** in the Solidity here. This is still enough to prototype deploy + launch + sell on your rollup.
+
 ## ⚠️ Notes
 
 - Currently deployed on **Monad Testnet**. Awaiting Monad mainnet release for production launch.

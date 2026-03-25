@@ -1,4 +1,13 @@
 {
+  "scripts": {
+    "compile": "node ./scripts/run-hardhat.cjs compile",
+    "deploy:leo": "node ./scripts/run-hardhat.cjs run scripts/deployLeo.ts --network leo",
+    "launch:leo": "node ./scripts/run-hardhat.cjs run scripts/launchToken.ts --network leo",
+    "sell:leo": "node ./scripts/run-hardhat.cjs run scripts/sellToken.ts --network leo",
+    "list:leo": "node ./scripts/run-hardhat.cjs run scripts/listTokens.ts --network leo",
+    "pump": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/pump-cli.ps1",
+    "pump:sh": "bash ./scripts/pump-cli.sh"
+  },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "ethers": "^6.13.5",

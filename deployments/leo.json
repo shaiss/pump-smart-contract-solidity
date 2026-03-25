@@ -1,0 +1,9 @@
+{
+  "network": "leo",
+  "chainId": "71757",
+  "factory": "0xD312230CE74dA1F05C5f4045EF1a7afC578C32da",
+  "factoryDeploymentBlock": 1204624,
+  "uniswapV2Router": "0xb09B212f3Ef899117849c18E6E962550d797454E",
+  "mockWeth": "0x5A3427d45D8Fe105c756f45fC9B3951337Fb2460",
+  "deployedAt": "2026-03-24T13:33:17.305Z"
+}
