@@ -11,19 +11,14 @@ This repo is a **derivative of** [vvizardev/pump-smart-contract-solidity](https:
 
 See **NOTICE** and **LICENSE** for attribution. **Not audited** — testnet / prototyping only.
 
-### Push this fork to your own GitHub
+### This fork on GitHub
 
-1. Create an empty repo on GitHub (no README/license if you want a clean first push).  
-2. In this project directory:
+**https://github.com/shaiss/pump-smart-contract-solidity**
 
-   ```bash
-   git remote rename origin upstream   # only if origin still points at vvizardev
-   git remote add origin https://github.com/YOUR_USER/YOUR_REPO.git
-   git push -u origin main             # or master — use your default branch
-   ```
+`origin` → that repo; `upstream` → [vvizardev/pump-smart-contract-solidity](https://github.com/vvizardev/pump-smart-contract-solidity). The clone was **shallow** at first; run `git fetch --unshallow upstream` before pushing if you see remote unpack errors.
 
-3. Confirm secrets stay out of git: `git ls-files .env` should print nothing.  
-4. Optional: keep upstream to merge fixes — `git fetch upstream`.
+- Confirm secrets stay out of git: `git ls-files .env` should print nothing.  
+- Sync from upstream: `git fetch upstream` then merge or rebase as you prefer.
 
 ---
 
