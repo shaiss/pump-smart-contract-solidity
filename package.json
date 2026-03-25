@@ -3,6 +3,14 @@
   "version": "0.0.0-fork",
   "private": false,
   "description": "Pump-style EVM bonding curve; fork with Conduit Leo (OP Stack) tooling and gum CLI",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shaiss/pump-smart-contract-solidity.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shaiss/pump-smart-contract-solidity/issues"
+  },
+  "homepage": "https://github.com/shaiss/pump-smart-contract-solidity#readme",
   "scripts": {
     "compile": "node ./scripts/run-hardhat.cjs compile",
     "deploy:leo": "node ./scripts/run-hardhat.cjs run scripts/deployLeo.ts --network leo",
