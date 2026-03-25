@@ -1,6 +1,33 @@
 # 💊 PumpFun EVM Smart Contract
 
-The **Pump.fun EVM Smart Contract** brings the power of viral, one-click token creation to the **EVM-Compatible blockchain**, mirroring the simplicity and virality of the original **Pump.fun** on Solana. This version is built natively for **Monad's EVM-compatible testnet**, with full support for **Uniswap liquidity migration**, enabling instant tradability in the broader Ethereum ecosystem.
+## This fork (Conduit / OP Stack L3)
+
+This repo is a **derivative of** [vvizardev/pump-smart-contract-solidity](https://github.com/vvizardev/pump-smart-contract-solidity), extended for **Conduit‑hosted rollups** (tested on **Leo**: OP Stack, chain ID **71757**, Base settlement). It adds:
+
+- Hardhat **`leo`** network + optional **mock Uniswap V2 router** deploy when no router is set  
+- **`scripts/run-hardhat.cjs`** — run Hardhat without `npx` (avoids npm env‑var noise on Windows)  
+- **`scripts/pump-cli.ps1`** / **`pump-cli.sh`** — [gum](https://github.com/charmbracelet/gum) menu, `.env` defaults, **4‑char symbol from name**, list → **`gum table --print`**  
+- **`deployments/*.json`** + **`listTokens` / `launchToken` / `sellToken`** quality‑of‑life  
+
+See **NOTICE** and **LICENSE** for attribution. **Not audited** — testnet / prototyping only.
+
+### Push this fork to your own GitHub
+
+1. Create an empty repo on GitHub (no README/license if you want a clean first push).  
+2. In this project directory:
+
+   ```bash
+   git remote rename origin upstream   # only if origin still points at vvizardev
+   git remote add origin https://github.com/YOUR_USER/YOUR_REPO.git
+   git push -u origin main             # or master — use your default branch
+   ```
+
+3. Confirm secrets stay out of git: `git ls-files .env` should print nothing.  
+4. Optional: keep upstream to merge fixes — `git fetch upstream`.
+
+---
+
+The **Pump.fun EVM Smart Contract** brings the power of viral, one-click token creation to the **EVM-Compatible blockchain**, mirroring the simplicity and virality of the original **Pump.fun** on Solana. The upstream project targets **Monad testnet**; this fork additionally documents **Conduit Leo** below.
 
 ---
 
@@ -142,13 +169,14 @@ Use the ABI at `artifacts/contracts/PumpFactory.sol/PumpCloneFactory.json` for o
 
 ## 🤝 Credits
 
-This project is inspired by the original [Pump.fun Solana Smart Contract](https://github.com/vvizardev/Pump.fun-Smart-Contract), re-engineered for EVM chains starting with Monad.
+- **Upstream EVM repo:** [vvizardev/pump-smart-contract-solidity](https://github.com/vvizardev/pump-smart-contract-solidity)  
+- **Original Solana inspiration:** [Pump.fun Solana Smart Contract](https://github.com/vvizardev/Pump.fun-Smart-Contract)  
 
 ---
 
 ## 📬 Contributing
 
-PRs, issues, and feature suggestions are welcome! Feel free to fork, build, and contribute to the evolution of memecoin infrastructure on Monad.
+Issues and PRs are welcome on **this fork**. Upstream also accepts contributions on the [original Monad‑focused repository](https://github.com/vvizardev/pump-smart-contract-solidity).
 
 ---
 

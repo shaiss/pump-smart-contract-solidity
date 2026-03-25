@@ -1,0 +1,12 @@
+Pump-style EVM smart contracts and tooling
+
+This repository is derived from upstream work by vvizardev:
+  https://github.com/vvizardev/pump-smart-contract-solidity
+
+Additional changes in this fork (Conduit / Leo network wiring, CLI scripts,
+run-hardhat wrapper, documentation, etc.) are provided under the same
+license as LICENSE in this repository.
+
+If the upstream repository specifies a different license or additional
+attribution requirements, those terms apply to the corresponding upstream
+materials.

@@ -1,4 +1,8 @@
 {
+  "name": "pump-smart-contract-solidity",
+  "version": "0.0.0-fork",
+  "private": false,
+  "description": "Pump-style EVM bonding curve; fork with Conduit Leo (OP Stack) tooling and gum CLI",
   "scripts": {
     "compile": "node ./scripts/run-hardhat.cjs compile",
     "deploy:leo": "node ./scripts/run-hardhat.cjs run scripts/deployLeo.ts --network leo",
